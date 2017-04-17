@@ -1,23 +1,33 @@
 ﻿using System;
+using IdeaBot.Models;
 
-namespace ConsoleApp.SQLite
+namespace IdeaBot
 {
     public class Program
     {
         public static void Main()
         {
-            using (var db = new BloggingContext())
+            using (var db = new IdeaContext())
             {
-                db.Blogs.Add(new Blog { Url = "http://blogs.msdn.com/adonet" });
-                var count = db.SaveChanges();
-                Console.WriteLine("{0} records saved to database", count);
+                var numIdeasInBatch =  Console.ReadLine();
+                var ideaBatch = new IdeaBatch(Convert.ToInt32(numIdeasInBatch));
+                db.IdeaBatches.Add(ideaBatch);
 
-                Console.WriteLine();
-                Console.WriteLine("All blogs in database:");
-                foreach (var blog in db.Blogs)
+                for (var i = 0; i <  Convert.ToInt32(numIdeasInBatch); i++)
                 {
-                    Console.WriteLine(" - {0}", blog.Url);
+                    db.Ideas.Add(new Idea(ideaBatch.IdeaBatchId));
+                    var count = db.SaveChanges();
+                    Console.WriteLine("{0} records saved to database", count);
                 }
+
+                
+
+                // Console.WriteLine();
+                // Console.WriteLine("All blogs in database:");
+                // foreach (var blog in db.Blogs)
+                // {
+                //     Console.WriteLine(" - {0}", blog.Url);
+                // }
             }
         }
     }
