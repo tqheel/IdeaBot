@@ -7,15 +7,14 @@ namespace IdeaBot.Models
     {
         public int IdeaBatchId { get; set; }
         public long IdeaTime { get; set; }
-        public string IdeaText { get; set; }   
-        public long IdeaBatchTime { get; set; }
-        public int  NumIdeasInBatch { get; set; }     
+        public long IdeaBatchTime { get; set; }  
         
         public List<Idea> Ideas { get; set; }   
-        public IdeaBatch (int numIdeasInBatch)
+        public IdeaBatch ()
         {
-            this.IdeaBatchTime = Convert.ToInt64(DateTime.Now);
-            this.NumIdeasInBatch = numIdeasInBatch;
+            var now = DateTime.Now;
+            var dto = new DateTimeOffset(now);
+            this.IdeaBatchTime = dto.ToUnixTimeSeconds();
         }
     }
 }

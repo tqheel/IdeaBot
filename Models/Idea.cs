@@ -14,7 +14,9 @@ namespace IdeaBot.Models
         public Idea (int ideaBatchId)
         {
             this.IdeaBatchId = ideaBatchId;
-            this.IdeaTime = Convert.ToInt64(DateTime.Now);
+            var now = DateTime.Now;
+            var dto = new DateTimeOffset(now);
+            this.IdeaTime = dto.ToUnixTimeMilliseconds();
         }
     }
 }

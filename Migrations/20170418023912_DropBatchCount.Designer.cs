@@ -8,9 +8,10 @@ using IdeaBot.Models;
 namespace IdeaBot.Migrations
 {
     [DbContext(typeof(IdeaContext))]
-    partial class IdeaContextModelSnapshot : ModelSnapshot
+    [Migration("20170418023912_DropBatchCount")]
+    partial class DropBatchCount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1");
